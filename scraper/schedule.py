@@ -1,33 +1,41 @@
 import requests
 from bs4 import BeautifulSoup
+from config.settings import SCHEDULE_URL
 
-def get_page(url):
-    headers = {
-        "User-Agent": "Mozilla/5.0"
-    }
+headers = {
+    "Authorization": 'ticket="rQd80er06_iK2XNXtVrztisEL_oda-P-_-97NNgY1z0RrH_30sDUVi9jh5JKuueOBpKpHCIyP7X9spkHdj6GTtk2"',
+    "User-Agent": "Mozilla/5.0"
+}
+
+def get_schedule():
+    url = SCHEDULE_URL
     res = requests.get(url, headers=headers)
-    return BeautifulSoup(res.text, "html.parser")
+    data = res.json()
 
-def scrape_schedule(url):
-    soup = get_page(url)
+    
+    html = data["content"]
+    soup = BeautifulSoup(html, "html.parser")
 
     games = []
 
-    rows = soup.select("table tr")  # adjust selector
+    rows = soup.select("table tbody tr")
 
-    for row in rows[1:]:  # skip header
+    for row in rows:
         cols = row.find_all("td")
 
-        if len(cols) == 0:
+        if len(cols) < 3:
             continue
 
-        game = {
-            "date": cols[0].text.strip(),
-            "home": cols[1].text.strip(),
-            "away": cols[2].text.strip(),
-            "score": cols[3].text.strip()
-        }
+        number = cols[0].text.strip()
+        number = number if number else None
+        name = cols[1].text.strip()
+        position = cols[2].text.strip()
 
-        games.append(game)
+        players.append({
+            "number": number,
+            "name": name,
+            "position": position
+        })
 
-    return games
+    return players
+
