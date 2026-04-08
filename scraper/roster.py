@@ -12,13 +12,15 @@ def get_roster():
     res = requests.get(url, headers=headers)
     data = res.json()
 
+    print   (f"Status: {res.status_code}")
+    print   (f"URL: {res.url}")
     
     html = data["content"]
     soup = BeautifulSoup(html, "html.parser")
 
     players = []
 
-    rows = soup.select("table tbody tr")
+    rows = soup.select_one("table").select("tbody tr")
 
     for row in rows:
         cols = row.find_all("td")
@@ -37,8 +39,6 @@ def get_roster():
             "position": position
         })
 
-        for player in players:
-            print(player)
 
     return players
 

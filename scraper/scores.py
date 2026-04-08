@@ -1,41 +1,34 @@
 import requests
-import json
 import re
+import json
 from urllib.parse import unquote
-from config.settings import SCHEDULE_URL, AUTH_TICKET
+from config.settings import SCORES_URL, AUTH_TICKET
 
-headers = {
+HEADERS = {
     "Authorization": AUTH_TICKET,
-    "Accept": "application/json, text/plain, */*",
-    "Accept-Language": "en-US,en;q=0.9",
     "Origin": "https://www.langleyhockeyhouse.com",
     "Referer": "https://www.langleyhockeyhouse.com/",
     "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Mobile Safari/537.36",
-    "sec-ch-ua": '"Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"',
-    "sec-ch-ua-mobile": "?1",
-    "sec-ch-ua-platform": "Android",
-    "Sec-Fetch-Dest": "empty",
-    "Sec-Fetch-Mode": "cors",
-    "Sec-Fetch-Site": "cross-site",
 }
 
 
-def get_schedule() -> list[dict]:
-    res = requests.get(SCHEDULE_URL, headers=headers)
-    return parse_schedule_response(res.json()["content"])
+def get_scores() -> list[dict]:
+    res = requests.get(SCORES_URL, headers=HEADERS)
+    res.raise_for_status()
+    return parse_scores_response(res.json()["content"])
 
-def parse_schedule_response(raw_content: str) -> list[dict]:
 
-    match = re.search(r'ng-init="ctrl\.schedule=(\[.*?\])"', raw_content)
+def parse_scores_response(raw_content: str) -> list[dict]:
+    match = re.search(r'ng-init="ctrl\.scores=(\[.*?\])"', raw_content)
     if not match:
-        raise ValueError("Could not find schedule data in response")
+        raise ValueError("Could not find scores data in response")
 
     json_str = match.group(1).replace('&quot;', '"')
-    games_raw = json.loads(json_str)
+    scores_raw = json.loads(json_str)
 
-    games = []
-    for g in games_raw:
-        games.append({
+    scores = []
+    for g in scores_raw:
+        scores.append({
             "game_id":          g["game_id"],
             "status":           g["status"],
             "game_type":        g["game_type"],
@@ -65,19 +58,9 @@ def parse_schedule_response(raw_content: str) -> list[dict]:
             "shootout": g["shootout"],
         })
 
-    return games
+    return scores
 
-
-def print_schedule(games: list[dict]) -> None:
-    for game in games:
-        print(
-            f"{game['date']} {game['time']}  |  "
-            f"{game['home']['team']} vs {game['away']['team']}  |  "
-            f"{game['facility']}  |  {game['status']}"
-        )
-
-
-if __name__ == "__main__":
-    schedule = get_schedule()
-    print_schedule(schedule)
-    print(json.dumps(schedule, indent=2))
+def print_scores(scores: list[dict]):
+    for score in scores:
+        print(f"{score['date']} {score['time']} - {score['home']['team']} {score['home']['score']} vs {score['away']['team']} {score['away']['score']} ({score['status']})")
+        

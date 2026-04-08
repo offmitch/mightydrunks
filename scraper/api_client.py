@@ -1,15 +1,23 @@
 import requests
+
+from scraper import stats
+from scraper import scores
+from scraper.schedule import get_schedule, print_schedule
 from . import roster
 
-HEADERS = {
-    "User-Agent": "Mozilla/5.0"
-}
-
-# def fetch_json(url):
-#     res = requests.get(url, headers=HEADERS)
-#     res.raise_for_status()
-#     return res.json()
-
 players = roster.get_roster()
+print("-----------------Roster:-----------------")
 for player in players:
     print(player)
+
+games = get_schedule()
+print("-----------------Schedule:-----------------")
+print_schedule(games)
+
+playerStats = stats.get_stats()
+print("-----------------Player Stats:-----------------")
+stats.print_stats(playerStats)
+
+scores1 = scores.get_scores()
+print("-----------------Scores:-----------------")
+scores.print_scores(scores1)
