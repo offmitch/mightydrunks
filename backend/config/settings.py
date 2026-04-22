@@ -1,7 +1,5 @@
-from dotenv import load_dotenv
 import os
 
-load_dotenv()
 
 TEAM_ID = "633828"
 AUTH_TICKET = os.getenv("AUTH_TICKET")
