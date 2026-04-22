@@ -53,12 +53,11 @@ def parse_stats_response(raw_content: str) -> list[dict]:
             "player_id":  player_id,
             "name":       name_cell.text.strip(),
             "number":     number,
-            "position":   stats[2] if len(stats) > 2 else None,
-            "gp":         stats[3] if len(stats) > 3 else None,
-            "g":          stats[4] if len(stats) > 4 else None,
-            "a":          stats[5] if len(stats) > 5 else None,
-            "pts":        stats[6] if len(stats) > 6 else None,
-            "pim":        stats[7] if len(stats) > 7 else None,
+            "games_played": stats[3] if len(stats) > 3 else None,
+            "goals":      stats[4] if len(stats) > 4 else None,
+            "assists":    stats[5] if len(stats) > 5 else None,
+            "points":     stats[6] if len(stats) > 6 else None,
+            "penalty_minutes": stats[7] if len(stats) > 7 else None,
         })
 
     return players
@@ -67,5 +66,5 @@ def parse_stats_response(raw_content: str) -> list[dict]:
 def print_stats(players: list[dict]) -> None:
     for player in players:
         print(
-            f"{player['name']} (#{player['number']}) - {player['position']} | Games Played: {player['gp']}, Goals: {player['g']}, Assists: {player['a']}, Points: {player['pts']}, Penalty Minutes: {player['pim']}"
+            f"{player['name']} (#{player['number']}) - {player['position']} | Games Played: {player['games played']}, Goals: {player['goals']}, Assists: {player['assists']}, Points: {player['points']}, Penalty Minutes: {player['penalty minutes']}"
         )
