@@ -39,7 +39,7 @@ async function loadStats() {
 `;
 
   try {
-    const res = await fetch("http://127.0.0.1:5000/api/stats");
+    const res = await fetch("https://mightydrunks-backend.onrender.com/api/stats");
     const players = await res.json();
 
     tbody.innerHTML = "";
@@ -71,7 +71,7 @@ async function loadStats() {
 }
 
 async function loadSchedule() {
-  const res = await fetch("http://127.0.0.1:5000/api/schedule");
+  const res = await fetch("https://mightydrunks-backend.onrender.com/api/schedule");
   const games = await res.json();
 
   const tbody = document.querySelector("#scheduleTable tbody");
@@ -112,7 +112,7 @@ async function loadSchedule() {
 }
 
 async function loadScores() {
-  const res = await fetch("http://127.0.0.1:5000/api/scores");
+  const res = await fetch("https://mightydrunks-backend.onrender.com/api/scores");
   const scores = await res.json();
 
   const tbody = document.querySelector("#scoresTable tbody");

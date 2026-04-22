@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify
 from flask_cors import CORS
 from scraper.scores import get_scores
@@ -6,7 +7,7 @@ from scraper.roster import get_roster
 from scraper.stats import get_stats
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:3000"])
+CORS(app, origins=["https://mightydrunks.onrender.com"])
 
 @app.route("/api/roster")
 def roster():
@@ -43,4 +44,4 @@ def scores():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
