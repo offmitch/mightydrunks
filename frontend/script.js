@@ -113,6 +113,7 @@ async function loadHome() {
       document.getElementById("heroAssists").textContent = top.assists ?? "";
       document.getElementById("heroPoints").textContent = top.points ?? "";
       document.getElementById("heroGP").textContent = top.games_played ?? "";
+      if (loader) loader.style.display = "none";
     }
 
     // Next game
@@ -140,6 +141,7 @@ async function loadHome() {
       document.getElementById("nextGameMeta").textContent =
         `${fDate} · ${fTime}`;
       document.getElementById("nextGameCard").style.display = "";
+      if (loader) loader.style.display = "none";
     } else {
       document.getElementById("nextGameCard").style.display = "none";
     }
@@ -177,14 +179,13 @@ async function loadHome() {
       scoreBadge.style.display = "";
 
       document.getElementById("prevGameCard").style.display = "";
+      if (loader) loader.style.display = "none";
     } else {
       document.getElementById("prevGameCard").style.display = "none";
     }
-     if (loader) loader.style.display = "none";
   } catch (e) {
     console.error("Home load error:", e);
   }
- 
 }
 
 // ── roster ────────────────────────────────────────────────────
