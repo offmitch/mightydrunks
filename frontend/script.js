@@ -22,6 +22,27 @@ function showSpinner(containerId, label = "Loading...") {
   `;
 }
 
+function clearHomeUI() {
+  [
+    "heroName",
+    "heroPos",
+    "heroGoals",
+    "heroAssists",
+    "heroPoints",
+    "heroGP",
+    "nextGameHome",
+    "nextGameAway",
+    "nextGameMeta",
+    "prevGameHome",
+    "prevGameAway",
+    "prevGameMeta",
+    "prevGameScore",
+  ].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = "";
+  });
+}
+
 function headshotEl(name, size = 80) {
   const p = playerLookup(name);
   if (p.headshot) {
@@ -62,17 +83,22 @@ let cachedRoster = [];
 // ── home tab ─────────────────────────────────────────────────
 
 async function loadHome() {
-  showSpinner("nextGameSpinner", "Loading schedule...");
-  showSpinner("prevGameSpinner", "Loading schedule...");
-  // Top scorer
+  clearHomeUI();
+  const loader = document.getElementById("homeLoading");
+
+  // SHOW spinner
+  if (loader) loader.style.display = "flex";
+
   try {
     const [statsRes, schedRes] = await Promise.all([
       fetch(`${BASE}/stats`),
       fetch(`${BASE}/schedule`),
     ]);
+
     const stats = await statsRes.json();
     const schedule = await schedRes.json();
-    // Top scorer by points
+
+    // Top scorer
     const sorted = [...stats].sort((a, b) => (b.points || 0) - (a.points || 0));
     const top = sorted[0];
 
@@ -83,13 +109,13 @@ async function loadHome() {
       );
       document.getElementById("heroName").textContent = top.name;
       document.getElementById("heroPos").textContent = top.position || "";
-      document.getElementById("heroGoals").textContent = top.goals ?? "-";
-      document.getElementById("heroAssists").textContent = top.assists ?? "-";
-      document.getElementById("heroPoints").textContent = top.points ?? "-";
-      document.getElementById("heroGP").textContent = top.games_played ?? "-";
+      document.getElementById("heroGoals").textContent = top.goals ?? "";
+      document.getElementById("heroAssists").textContent = top.assists ?? "";
+      document.getElementById("heroPoints").textContent = top.points ?? "";
+      document.getElementById("heroGP").textContent = top.games_played ?? "";
     }
 
-    // Next upcoming game
+    // Next game
     const now = new Date();
     const upcoming = schedule
       .map((g) => ({ ...g, _dt: new Date(`${g.date}T${g.time}`) }))
@@ -97,16 +123,20 @@ async function loadHome() {
       .sort((a, b) => a._dt - b._dt);
 
     const next = upcoming[0];
+
     if (next) {
       const { fDate, fTime } = formatDateTime(next.date, next.time);
-      const homeTeam = next.home?.team || next.home || "-";
-      const awayTeam = next.away?.team || next.away || "-";
+      const homeTeam = next.home?.team || next.home || "";
+      const awayTeam = next.away?.team || next.away || "";
+
       document.getElementById("nextGameHome").textContent = homeTeam;
       document.getElementById("nextGameHome").className =
         "next-game-team" + (homeTeam === OUR_TEAM ? " is-us" : "");
+
       document.getElementById("nextGameAway").textContent = awayTeam;
       document.getElementById("nextGameAway").className =
         "next-game-team right" + (awayTeam === OUR_TEAM ? " is-us" : "");
+
       document.getElementById("nextGameMeta").textContent =
         `${fDate} · ${fTime}`;
       document.getElementById("nextGameCard").style.display = "";
@@ -123,19 +153,16 @@ async function loadHome() {
       .sort((a, b) => b._dt - a._dt);
 
     const prev = past[0];
+
     if (prev) {
       const { fDate } = formatDateTime(prev.date, prev.time);
-      const homeTeam = prev.home?.team || prev.home || "-";
-      const awayTeam = prev.away?.team || prev.away || "-";
-      const homeScore = prev.home?.score ?? "-";
-      const awayScore = prev.away?.score ?? "-";
+      const homeTeam = prev.home?.team || prev.home || "";
+      const awayTeam = prev.away?.team || prev.away || "";
+      const homeScore = prev.home?.score ?? "";
+      const awayScore = prev.away?.score ?? "";
 
       document.getElementById("prevGameHome").textContent = homeTeam;
-      document.getElementById("prevGameHome").className =
-        "next-game-team" + (homeTeam === OUR_TEAM ? " is-us" : "");
       document.getElementById("prevGameAway").textContent = awayTeam;
-      document.getElementById("prevGameAway").className =
-        "next-game-team right" + (awayTeam === OUR_TEAM ? " is-us" : "");
       document.getElementById("prevGameMeta").textContent = fDate;
 
       const isHome = homeTeam === OUR_TEAM;
@@ -153,11 +180,11 @@ async function loadHome() {
     } else {
       document.getElementById("prevGameCard").style.display = "none";
     }
-     document.getElementById("nextGameSpinner").innerHTML = "";
-    document.getElementById("prevGameSpinner").innerHTML = "";
+     if (loader) loader.style.display = "none";
   } catch (e) {
     console.error("Home load error:", e);
   }
+ 
 }
 
 // ── roster ────────────────────────────────────────────────────
@@ -179,7 +206,7 @@ async function loadRoster() {
   const players = await res.json();
   cachedRoster = players;
 
-  tbody.innerHTML = ""; 
+  tbody.innerHTML = "";
 
   players.forEach((player) => {
     if (player.position === "0" || player.position === "1")
@@ -200,7 +227,7 @@ async function loadRoster() {
 // ── stats ─────────────────────────────────────────────────────
 
 async function loadStats() {
-   const tbody = document.querySelector("#statsTable tbody");
+  const tbody = document.querySelector("#statsTable tbody");
   tbody.innerHTML = `
     <tr>
       <td colspan="6">
@@ -237,7 +264,7 @@ async function loadStats() {
 // ── schedule ──────────────────────────────────────────────────
 
 async function loadSchedule() {
-   const tbody = document.querySelector("#scheduleTable tbody");
+  const tbody = document.querySelector("#scheduleTable tbody");
   tbody.innerHTML = `
     <tr>
       <td colspan="5">
@@ -271,7 +298,7 @@ async function loadSchedule() {
 // ── scores ────────────────────────────────────────────────────
 
 async function loadScores() {
-    const tbody = document.querySelector("#scoresTable tbody");
+  const tbody = document.querySelector("#scoresTable tbody");
   tbody.innerHTML = `
     <tr>
       <td colspan="6">
