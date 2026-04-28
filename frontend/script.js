@@ -64,6 +64,7 @@ let cachedRoster = [];
 async function loadHome() {
   showSpinner("heroContainer", "Loading stats...");
   showSpinner("nextGameCard", "Loading schedule...");
+  showSpinner("prevGameCard", "Loading score...");
   // Top scorer
   try {
     const [statsRes, schedRes] = await Promise.all([
@@ -110,6 +111,7 @@ async function loadHome() {
       document.getElementById("nextGameMeta").textContent =
         `${fDate} · ${fTime}`;
       document.getElementById("nextGameCard").style.display = "";
+      document.getElementById("nextGameSpinner").innerHTML = "";
     } else {
       document.getElementById("nextGameCard").style.display = "none";
     }
@@ -150,6 +152,7 @@ async function loadHome() {
       scoreBadge.style.display = "";
 
       document.getElementById("prevGameCard").style.display = "";
+      document.getElementById("prevGameSpinner").innerHTML = "";
     } else {
       document.getElementById("prevGameCard").style.display = "none";
     }
@@ -161,14 +164,23 @@ async function loadHome() {
 // ── roster ────────────────────────────────────────────────────
 
 async function loadRoster() {
-  showSpinner("rosterSpinner", "Loading roster...");
+  const tbody = document.querySelector("#rosterTable tbody");
+  tbody.innerHTML = `
+    <tr>
+      <td colspan="3">
+        <div class="spinner-wrap">
+          <div class="spinner"></div>
+          <div class="spinner-label">Loading roster...</div>
+        </div>
+      </td>
+    </tr>
+  `;
+
   const res = await fetch(`${BASE}/roster`);
   const players = await res.json();
   cachedRoster = players;
-  document.getElementById("rosterSpinner").style.display = "none";
 
-  const tbody = document.querySelector("#rosterTable tbody");
-  tbody.innerHTML = "";
+  tbody.innerHTML = ""; 
 
   players.forEach((player) => {
     if (player.position === "0" || player.position === "1")
@@ -189,13 +201,22 @@ async function loadRoster() {
 // ── stats ─────────────────────────────────────────────────────
 
 async function loadStats() {
-    showSpinner("statsSpinner", "Loading stats...");
+   const tbody = document.querySelector("#statsTable tbody");
+  tbody.innerHTML = `
+    <tr>
+      <td colspan="6">
+        <div class="spinner-wrap">
+          <div class="spinner"></div>
+          <div class="spinner-label">Loading stats...</div>
+        </div>
+      </td>
+    </tr>
+  `;
+
   const res = await fetch(`${BASE}/stats`);
   const players = await res.json();
   cachedStats = players;
-  document.getElementById("statsSpinner").style.display = "none";
 
-  const tbody = document.querySelector("#statsTable tbody");
   tbody.innerHTML = "";
 
   players.forEach((player) => {
@@ -217,11 +238,21 @@ async function loadStats() {
 // ── schedule ──────────────────────────────────────────────────
 
 async function loadSchedule() {
-  showSpinner("scheduleSpinner", "Loading schedule...");
+   const tbody = document.querySelector("#scheduleTable tbody");
+  tbody.innerHTML = `
+    <tr>
+      <td colspan="5">
+        <div class="spinner-wrap">
+          <div class="spinner"></div>
+          <div class="spinner-label">Loading schedule...</div>
+        </div>
+      </td>
+    </tr>
+  `;
+
   const res = await fetch(`${BASE}/schedule`);
   const games = await res.json();
-  document.getElementById("scheduleSpinner").style.display = "none";
-  const tbody = document.querySelector("#scheduleTable tbody");
+
   tbody.innerHTML = "";
 
   games.forEach((game) => {
@@ -241,11 +272,21 @@ async function loadSchedule() {
 // ── scores ────────────────────────────────────────────────────
 
 async function loadScores() {
-  showSpinner("scoresSpinner", "Loading scores...");
+    const tbody = document.querySelector("#scoresTable tbody");
+  tbody.innerHTML = `
+    <tr>
+      <td colspan="6">
+        <div class="spinner-wrap">
+          <div class="spinner"></div>
+          <div class="spinner-label">Loading scores...</div>
+        </div>
+      </td>
+    </tr>
+  `;
+
   const res = await fetch(`${BASE}/scores`);
   const scores = await res.json();
-  document.getElementById("scoresSpinner").style.display = "none";
-  const tbody = document.querySelector("#scoresTable tbody");
+
   tbody.innerHTML = "";
 
   scores.forEach((score) => {

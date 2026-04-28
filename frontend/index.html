@@ -137,31 +137,34 @@
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Next Game -->
-          <h2 class="section-title">Next Game</h2>
-          <div class="next-game-card" id="nextGameCard">
-            <div class="next-game-label">🏒 Upcoming</div>
-            <div class="next-game-matchup">
-              <span id="nextGameHome" class="next-game-team">—</span>
-              <span class="next-game-vs">VS</span>
-              <span id="nextGameAway" class="next-game-team right">—</span>
-            </div>
-            <div class="next-game-meta" id="nextGameMeta"></div>
+        <!-- Next Game -->
+        <h2 class="section-title">Next Game</h2>
+        <div id="nextGameSpinner"></div>
+        <div class="next-game-card" id="nextGameCard" style="display: none">
+          <div class="next-game-label">🏒 Upcoming</div>
+          <div class="next-game-matchup">
+            <span id="nextGameHome" class="next-game-team">—</span>
+            <span class="next-game-vs">VS</span>
+            <span id="nextGameAway" class="next-game-team right">—</span>
           </div>
+          <div class="next-game-meta" id="nextGameMeta"></div>
+        </div>
 
-          <h2 class="section-title">Last Game</h2>
-          <div class="next-game-card" id="prevGameCard">
-            <div class="next-game-label">🕒 Previous</div>
-            <div class="next-game-matchup">
-              <span id="prevGameHome" class="next-game-team">—</span>
-              <span class="score-badge" id="prevGameScore" style="display: none"
-                >— – —</span
-              >
-              <span id="prevGameAway" class="next-game-team right">—</span>
-            </div>
-            <div class="next-game-meta" id="prevGameMeta"></div>
+        <!-- Last Game -->
+        <h2 class="section-title">Last Game</h2>
+        <div id="prevGameSpinner"></div>
+        <div class="next-game-card" id="prevGameCard" style="display: none">
+          <div class="next-game-label">🕒 Previous</div>
+          <div class="next-game-matchup">
+            <span id="prevGameHome" class="next-game-team">—</span>
+            <span class="score-badge" id="prevGameScore" style="display: none"
+              >— – —</span
+            >
+            <span id="prevGameAway" class="next-game-team right">—</span>
           </div>
+          <div class="next-game-meta" id="prevGameMeta"></div>
         </div>
       </section>
 
