@@ -108,64 +108,67 @@
       <section class="tab-panel active" id="tab-home" role="tabpanel">
         <!-- Top Scorer Hero -->
         <h2 class="section-title">Point Leader</h2>
-        <div class="home-hero">
-          <div class="hero-label">⭐ Season Leader</div>
-          <div class="hero-player">
-            <div id="heroHeadshot"></div>
-            <div class="hero-info">
-              <div class="hero-name" id="heroName">—</div>
-              <div class="hero-pos" id="heroPos"></div>
-              <div class="hero-stats">
-                <div class="hero-stat">
-                  <div class="hero-stat-val" id="heroGoals">—</div>
-                  <div class="hero-stat-lbl">G</div>
-                </div>
-                <div class="hero-stat">
-                  <div class="hero-stat-val" id="heroAssists">—</div>
-                  <div class="hero-stat-lbl">A</div>
-                </div>
-                <div class="hero-stat">
-                  <div class="hero-stat-val" id="heroPoints">—</div>
-                  <div class="hero-stat-lbl">PTS</div>
-                </div>
-                <div class="hero-stat">
-                  <div class="hero-stat-val" id="heroGP">—</div>
-                  <div class="hero-stat-lbl">GP</div>
+        <div id="heroContainer">
+          <div class="home-hero">
+            <div class="hero-label">⭐ Season Leader</div>
+            <div class="hero-player">
+              <div id="heroHeadshot"></div>
+              <div class="hero-info">
+                <div class="hero-name" id="heroName">—</div>
+                <div class="hero-pos" id="heroPos"></div>
+                <div class="hero-stats">
+                  <div class="hero-stat">
+                    <div class="hero-stat-val" id="heroGoals">—</div>
+                    <div class="hero-stat-lbl">G</div>
+                  </div>
+                  <div class="hero-stat">
+                    <div class="hero-stat-val" id="heroAssists">—</div>
+                    <div class="hero-stat-lbl">A</div>
+                  </div>
+                  <div class="hero-stat">
+                    <div class="hero-stat-val" id="heroPoints">—</div>
+                    <div class="hero-stat-lbl">PTS</div>
+                  </div>
+                  <div class="hero-stat">
+                    <div class="hero-stat-val" id="heroGP">—</div>
+                    <div class="hero-stat-lbl">GP</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Next Game -->
-        <h2 class="section-title">Next Game</h2>
-        <div class="next-game-card" id="nextGameCard">
-          <div class="next-game-label">🏒 Upcoming</div>
-          <div class="next-game-matchup">
-            <span id="nextGameHome" class="next-game-team">—</span>
-            <span class="next-game-vs">VS</span>
-            <span id="nextGameAway" class="next-game-team right">—</span>
+          <!-- Next Game -->
+          <h2 class="section-title">Next Game</h2>
+          <div class="next-game-card" id="nextGameCard">
+            <div class="next-game-label">🏒 Upcoming</div>
+            <div class="next-game-matchup">
+              <span id="nextGameHome" class="next-game-team">—</span>
+              <span class="next-game-vs">VS</span>
+              <span id="nextGameAway" class="next-game-team right">—</span>
+            </div>
+            <div class="next-game-meta" id="nextGameMeta"></div>
           </div>
-          <div class="next-game-meta" id="nextGameMeta"></div>
-        </div>
 
-        <h2 class="section-title">Last Game</h2>
-        <div class="next-game-card" id="prevGameCard">
-          <div class="next-game-label">🕒 Previous</div>
-          <div class="next-game-matchup">
-            <span id="prevGameHome" class="next-game-team">—</span>
-            <span class="score-badge" id="prevGameScore" style="display: none"
-              >— – —</span
-            >
-            <span id="prevGameAway" class="next-game-team right">—</span>
+          <h2 class="section-title">Last Game</h2>
+          <div class="next-game-card" id="prevGameCard">
+            <div class="next-game-label">🕒 Previous</div>
+            <div class="next-game-matchup">
+              <span id="prevGameHome" class="next-game-team">—</span>
+              <span class="score-badge" id="prevGameScore" style="display: none"
+                >— – —</span
+              >
+              <span id="prevGameAway" class="next-game-team right">—</span>
+            </div>
+            <div class="next-game-meta" id="prevGameMeta"></div>
           </div>
-          <div class="next-game-meta" id="prevGameMeta"></div>
         </div>
       </section>
 
       <!-- ─── ROSTER ─── -->
       <section class="tab-panel" id="tab-roster" role="tabpanel">
         <h2 class="section-title">Roster</h2>
+        <div id="rosterSpinner"></div>
         <div class="table-container">
           <table id="rosterTable">
             <thead>
@@ -183,6 +186,7 @@
       <!-- ─── STATS ─── -->
       <section class="tab-panel" id="tab-stats" role="tabpanel">
         <h2 class="section-title">Stats</h2>
+        <div id="statsSpinner"></div>
         <div class="table-container">
           <table id="statsTable">
             <thead>
@@ -203,6 +207,7 @@
       <!-- ─── SCHEDULE ─── -->
       <section class="tab-panel" id="tab-schedule" role="tabpanel">
         <h2 class="section-title">Schedule</h2>
+        <div id="scheduleSpinner"></div>
         <div class="table-container">
           <table id="scheduleTable">
             <thead>
@@ -222,6 +227,7 @@
       <!-- ─── SCORES ─── -->
       <section class="tab-panel" id="tab-scores" role="tabpanel">
         <h2 class="section-title">Scores</h2>
+        <div id="scoresSpinner"></div>
         <div class="table-container">
           <table id="scoresTable">
             <thead>

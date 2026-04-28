@@ -13,6 +13,15 @@ function playerLookup(name) {
   return (typeof PLAYER_DATA !== "undefined" && PLAYER_DATA[name]) || {};
 }
 
+function showSpinner(containerId, label = "Loading...") {
+  document.getElementById(containerId).innerHTML = `
+    <div class="spinner-wrap">
+      <div class="spinner"></div>
+      <div class="spinner-label">${label}</div>
+    </div>
+  `;
+}
+
 function headshotEl(name, size = 80) {
   const p = playerLookup(name);
   if (p.headshot) {
@@ -53,6 +62,8 @@ let cachedRoster = [];
 // ── home tab ─────────────────────────────────────────────────
 
 async function loadHome() {
+  showSpinner("heroContainer", "Loading stats...");
+  showSpinner("nextGameCard", "Loading schedule...");
   // Top scorer
   try {
     const [statsRes, schedRes] = await Promise.all([
@@ -107,8 +118,8 @@ async function loadHome() {
     const scoresRes = await fetch(`${BASE}/scores`);
     const scoresData = await scoresRes.json();
 
-   const past = scoresData
-      .map(g => ({ ...g, _dt: new Date(`${g.date}T${g.time}`) }))
+    const past = scoresData
+      .map((g) => ({ ...g, _dt: new Date(`${g.date}T${g.time}`) }))
       .sort((a, b) => b._dt - a._dt);
 
     const prev = past[0];
@@ -120,15 +131,18 @@ async function loadHome() {
       const awayScore = prev.away?.score ?? "-";
 
       document.getElementById("prevGameHome").textContent = homeTeam;
-      document.getElementById("prevGameHome").className = "next-game-team" + (homeTeam === OUR_TEAM ? " is-us" : "");
+      document.getElementById("prevGameHome").className =
+        "next-game-team" + (homeTeam === OUR_TEAM ? " is-us" : "");
       document.getElementById("prevGameAway").textContent = awayTeam;
-      document.getElementById("prevGameAway").className = "next-game-team right" + (awayTeam === OUR_TEAM ? " is-us" : "");
+      document.getElementById("prevGameAway").className =
+        "next-game-team right" + (awayTeam === OUR_TEAM ? " is-us" : "");
       document.getElementById("prevGameMeta").textContent = fDate;
 
       const isHome = homeTeam === OUR_TEAM;
       const ourScore = isHome ? homeScore : awayScore;
       const oppScore = isHome ? awayScore : homeScore;
-      const result = ourScore > oppScore ? "win" : ourScore < oppScore ? "loss" : "";
+      const result =
+        ourScore > oppScore ? "win" : ourScore < oppScore ? "loss" : "";
 
       const scoreBadge = document.getElementById("prevGameScore");
       scoreBadge.textContent = `${homeScore} – ${awayScore}`;
@@ -147,9 +161,11 @@ async function loadHome() {
 // ── roster ────────────────────────────────────────────────────
 
 async function loadRoster() {
+  showSpinner("rosterSpinner", "Loading roster...");
   const res = await fetch(`${BASE}/roster`);
   const players = await res.json();
   cachedRoster = players;
+  document.getElementById("rosterSpinner").style.display = "none";
 
   const tbody = document.querySelector("#rosterTable tbody");
   tbody.innerHTML = "";
@@ -173,9 +189,11 @@ async function loadRoster() {
 // ── stats ─────────────────────────────────────────────────────
 
 async function loadStats() {
+    showSpinner("statsSpinner", "Loading stats...");
   const res = await fetch(`${BASE}/stats`);
   const players = await res.json();
   cachedStats = players;
+  document.getElementById("statsSpinner").style.display = "none";
 
   const tbody = document.querySelector("#statsTable tbody");
   tbody.innerHTML = "";
@@ -199,9 +217,10 @@ async function loadStats() {
 // ── schedule ──────────────────────────────────────────────────
 
 async function loadSchedule() {
+  showSpinner("scheduleSpinner", "Loading schedule...");
   const res = await fetch(`${BASE}/schedule`);
   const games = await res.json();
-
+  document.getElementById("scheduleSpinner").style.display = "none";
   const tbody = document.querySelector("#scheduleTable tbody");
   tbody.innerHTML = "";
 
@@ -222,9 +241,10 @@ async function loadSchedule() {
 // ── scores ────────────────────────────────────────────────────
 
 async function loadScores() {
+  showSpinner("scoresSpinner", "Loading scores...");
   const res = await fetch(`${BASE}/scores`);
   const scores = await res.json();
-
+  document.getElementById("scoresSpinner").style.display = "none";
   const tbody = document.querySelector("#scoresTable tbody");
   tbody.innerHTML = "";
 
