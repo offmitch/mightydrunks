@@ -2,91 +2,91 @@
   {
     "name": "Riley Ganske",
     "number": "55",
-    "position": "P"
+    "position": "Defense"
   },
   {
-    "name": "Diego Millan",
+    "name": "Diego Millan (A)",
     "number": "8",
-    "position": "P"
+    "position": "Forward"
   },
   {
     "name": "Zander Andreone",
     "number": "96",
-    "position": "P"
+    "position": "Forward"
   },
   {
     "name": "Eshan Hussain",
     "number": "18",
-    "position": "P"
+    "position": "Forward"
   },
   {
     "name": "Aamir Bhangu",
     "number": "9",
-    "position": "P"
+    "position": "Forward"
   },
   {
-    "name": "Mitchell Macdonald",
+    "name": "Mitchell MacDonald",
     "number": "11",
-    "position": "P"
+    "position": "Forward"
   },
   {
     "name": "Trevor Boehm",
     "number": "16",
-    "position": "P"
+    "position": "Forward"
   },
   {
     "name": "Andrew Gwizd",
     "number": null,
-    "position": "P"
+    "position": "Defense"
   },
   {
     "name": "Anthony Gwizd",
     "number": "7",
-    "position": "P"
+    "position": "Defense"
   },
   {
     "name": "Anthony Jiang",
     "number": "34",
-    "position": "P"
+    "position": "Forward"
   },
   {
     "name": "Cole Parry",
     "number": null,
-    "position": "P"
+    "position": "Forward"
   },
   {
     "name": "Jake Ganske",
     "number": "18",
-    "position": "P"
+    "position": "Forward"
   },
   {
     "name": "Beckham Bell",
     "number": "17",
-    "position": "P"
+    "position": "Forward"
   },
   {
     "name": "Mike Gwizd",
     "number": "33",
-    "position": "P"
+    "position": "Forward"
   },
   {
-    "name": "Nolan Weisheit",
+    "name": "Nolan Weisheit (C)",
     "number": "44",
-    "position": "P"
+    "position": "Forward"
   },
   {
     "name": "Robby Davis",
     "number": "15",
-    "position": "P"
+    "position": "Defense"
   },
   {
     "name": "Steve Andreone",
     "number": "76",
-    "position": "0"
+    "position": "Goalie"
   },
   {
     "name": "Ron Vo",
     "number": "30",
-    "position": "1"
+    "position": "Goalie"
   }
 ]
