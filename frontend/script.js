@@ -62,9 +62,8 @@ let cachedRoster = [];
 // ── home tab ─────────────────────────────────────────────────
 
 async function loadHome() {
-  showSpinner("heroContainer", "Loading stats...");
-  showSpinner("nextGameCard", "Loading schedule...");
-  showSpinner("prevGameCard", "Loading score...");
+  showSpinner("nextGameSpinner", "Loading schedule...");
+  showSpinner("prevGameSpinner", "Loading schedule...");
   // Top scorer
   try {
     const [statsRes, schedRes] = await Promise.all([
@@ -111,7 +110,6 @@ async function loadHome() {
       document.getElementById("nextGameMeta").textContent =
         `${fDate} · ${fTime}`;
       document.getElementById("nextGameCard").style.display = "";
-      document.getElementById("nextGameSpinner").innerHTML = "";
     } else {
       document.getElementById("nextGameCard").style.display = "none";
     }
@@ -152,10 +150,11 @@ async function loadHome() {
       scoreBadge.style.display = "";
 
       document.getElementById("prevGameCard").style.display = "";
-      document.getElementById("prevGameSpinner").innerHTML = "";
     } else {
       document.getElementById("prevGameCard").style.display = "none";
     }
+     document.getElementById("nextGameSpinner").innerHTML = "";
+    document.getElementById("prevGameSpinner").innerHTML = "";
   } catch (e) {
     console.error("Home load error:", e);
   }
