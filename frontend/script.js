@@ -85,9 +85,13 @@ let cachedRoster = [];
 async function loadHome() {
   clearHomeUI();
   const loader = document.getElementById("homeLoading");
+  const nextLoader = document.getElementById("nextGameLoading");
+  const prevLoader = document.getElementById("prevGameLoading");
 
   // SHOW spinner
   if (loader) loader.style.display = "flex";
+  if (nextLoader) nextLoader.style.display = "flex";
+  if (prevLoader) prevLoader.style.display = "flex";
 
   try {
     const [statsRes, schedRes] = await Promise.all([
@@ -141,9 +145,12 @@ async function loadHome() {
       document.getElementById("nextGameMeta").textContent =
         `${fDate} · ${fTime}`;
       document.getElementById("nextGameCard").style.display = "";
-      if (loader) loader.style.display = "none";
+      if (nextLoader) nextLoader.style.display = "none";
     } else {
       document.getElementById("nextGameCard").style.display = "none";
+
+      const nextLoader = document.getElementById("nextGameLoading");
+      if (nextLoader) nextLoader.style.display = "none";
     }
 
     // Previous game
@@ -179,7 +186,7 @@ async function loadHome() {
       scoreBadge.style.display = "";
 
       document.getElementById("prevGameCard").style.display = "";
-      if (loader) loader.style.display = "none";
+      if (prevLoader) prevLoader.style.display = "none";
     } else {
       document.getElementById("prevGameCard").style.display = "none";
     }
