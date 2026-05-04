@@ -5,7 +5,7 @@
 // instagram: handle without @, or "" to hide the link
 
 const PLAYER_DATA = {
-  "Riley Ganske": {
+  "Riley Ganske (A)": {
     headshot: "images/riley.png",
     bio: "",
     instagram: "rileyxganske",
