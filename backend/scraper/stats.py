@@ -1,5 +1,7 @@
 import requests
 import json
+import os
+import time
 import re
 from urllib.parse import unquote
 from bs4 import BeautifulSoup
@@ -20,10 +22,31 @@ headers = {
     "Sec-Fetch-Site": "cross-site",
 }
 
+CACHE_FILE = "stats_cache.json"
+CACHE_DURATION = 60 * 60 * 24 * 7
 
 def get_stats() -> list[dict]:
+
+    # Check if cache exists and is still valid
+    if os.path.exists(CACHE_FILE):
+        file_age = time.time() - os.path.getmtime(CACHE_FILE)
+
+        if file_age < CACHE_DURATION:
+            with open(CACHE_FILE, "r") as f:
+                print("Loading stats from cache...")
+                return json.load(f)
+
+    # Otherwise fetch fresh data
+    print("Fetching fresh stats from API...")
+
     res = requests.get(STATS_URL, headers=headers)
-    return parse_stats_response(res.json()["content"])
+    players = parse_stats_response(res.json()["content"])
+
+    # Save to cache
+    with open(CACHE_FILE, "w") as f:
+        json.dump(players, f, indent=2)
+
+    return players 
 
 def parse_stats_response(raw_content: str) -> list[dict]:
     """
@@ -46,12 +69,17 @@ def parse_stats_response(raw_content: str) -> list[dict]:
         number_span = row.select_one(".p")
         number = number_span.text.strip().lstrip("#") if number_span else None
 
+        player_name = name_cell.text.strip()
+
+        if player_name.lower() == "eshan hussain":
+            number = None
+
         cols = row.find_all("td")
         stats = [td.text.strip() for td in cols]
 
         players.append({
             "player_id":  player_id,
-            "name":       name_cell.text.strip(),
+            "name":       player_name,
             "number":     number,
             "games_played": stats[3] if len(stats) > 3 else None,
             "goals":      stats[4] if len(stats) > 4 else None,

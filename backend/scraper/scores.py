@@ -1,6 +1,8 @@
 import requests
 import re
 import json
+import os
+import time
 from urllib.parse import unquote
 from config.settings import SCORES_URL, AUTH_TICKET
 
@@ -11,11 +13,30 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Mobile Safari/537.36",
 }
 
+CACHE_FILE = "scores_cache.json"
+CACHE_DURATION = 60 * 60 * 24 * 7
 
 def get_scores() -> list[dict]:
+    # Check if cache exists and is still valid
+    if os.path.exists(CACHE_FILE):
+        file_age = time.time() - os.path.getmtime(CACHE_FILE)
+
+        if file_age < CACHE_DURATION:
+            with open(CACHE_FILE, "r") as f:
+                print("Loading scores from cache...")
+                return json.load(f)
+    # Otherwise fetch fresh data
+    print("Fetching fresh scores from API...")
+
     res = requests.get(SCORES_URL, headers=HEADERS)
     res.raise_for_status()
-    return parse_scores_response(res.json()["content"])
+    scores = parse_scores_response(res.json()["content"])
+
+    # Save to cache
+    with open(CACHE_FILE, "w") as f:
+        json.dump(scores, f, indent=2)
+
+    return scores
 
 
 def parse_scores_response(raw_content: str) -> list[dict]:

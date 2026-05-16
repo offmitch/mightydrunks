@@ -1,5 +1,7 @@
 import requests
 import json
+import os
+import time
 import re
 from urllib.parse import unquote
 from config.settings import SCHEDULE_URL, AUTH_TICKET
@@ -19,10 +21,30 @@ headers = {
     "Sec-Fetch-Site": "cross-site",
 }
 
+CACHE_FILE = "schedule_cache.json"
+CACHE_DURATION = 60 * 60 * 24 * 7
 
 def get_schedule() -> list[dict]:
+    # Check if cache exists and is still valid
+    if os.path.exists(CACHE_FILE):
+        file_age = time.time() - os.path.getmtime(CACHE_FILE)
+
+        if file_age < CACHE_DURATION:
+            with open(CACHE_FILE, "r") as f:
+                print("Loading schedule from cache...")
+                return json.load(f)
+
+    # Otherwise fetch fresh data
+    print("Fetching fresh schedule from API...")
+
     res = requests.get(SCHEDULE_URL, headers=headers)
-    return parse_schedule_response(res.json()["content"])
+    games = parse_schedule_response(res.json()["content"])
+
+    # Save to cache
+    with open(CACHE_FILE, "w") as f:
+        json.dump(games, f, indent=2)
+
+    return games
 
 def parse_schedule_response(raw_content: str) -> list[dict]:
 
