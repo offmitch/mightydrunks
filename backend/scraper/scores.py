@@ -19,10 +19,10 @@ CACHE_FILE = "scores_cache.json"
 
 def get_scores(schedule: list[dict]) -> list[dict]:
 
-    # if not should_refresh_cache(schedule):
-    #     with open(CACHE_FILE, "r") as f:
-    #         print("Loading scores from cache...")
-    #         return json.load(f)
+    if not should_refresh_cache(schedule):
+        with open(CACHE_FILE, "r") as f:
+            print("Loading scores from cache...")
+            return json.load(f)
 
     # Otherwise fetch fresh data
     print("Fetching fresh scores from API...")

@@ -27,10 +27,10 @@ CACHE_FILE = "stats_cache.json"
 
 def get_stats(schedule: list[dict]) -> list[dict]:
 
-    # if not should_refresh_cache(schedule):
-    #     with open(CACHE_FILE, "r") as f:
-    #         print("Loading stats from cache...")
-    #         return json.load(f)
+    if not should_refresh_cache(schedule):
+        with open(CACHE_FILE, "r") as f:
+            print("Loading stats from cache...")
+            return json.load(f)
 
 
     # Otherwise fetch fresh data
@@ -68,7 +68,13 @@ def parse_stats_response(raw_content: str) -> list[dict]:
 
         player_name = name_cell.text.strip()
 
-        if player_name.lower() == "eshan hussain":
+        # Append captain/assistant markers
+        if player_name in ["Riley Ganske", "Diego Millan"]:
+            player_name += " (A)"
+        elif player_name == "Nolan Weisheit":
+            player_name += " (C)"
+
+        if player_name.lower().replace(" (a)", "").replace(" (c)", "") == "eshan hussain":
             number = None
 
         cols = row.find_all("td")

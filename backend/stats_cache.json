@@ -1,5 +1,15 @@
 [
   {
+    "player_id": "3293873",
+    "name": "Riley Ganske (A)",
+    "number": "55",
+    "games_played": "5",
+    "goals": "5",
+    "assists": "6",
+    "points": "11",
+    "penalty_minutes": "2.2"
+  },
+  {
     "player_id": "3063295",
     "name": "Beckham Bell",
     "number": "17",
@@ -10,38 +20,38 @@
     "penalty_minutes": "2.5"
   },
   {
-    "player_id": "3293873",
-    "name": "Riley Ganske",
-    "number": "55",
-    "games_played": "4",
-    "goals": "5",
-    "assists": "3",
-    "points": "8",
-    "penalty_minutes": "2.0"
-  },
-  {
     "player_id": "3620339",
     "name": "Trevor Boehm",
     "number": "16",
-    "games_played": "4",
-    "goals": "2",
+    "games_played": "5",
+    "goals": "4",
     "assists": "5",
-    "points": "7",
+    "points": "9",
     "penalty_minutes": "1.8"
+  },
+  {
+    "player_id": "2937068",
+    "name": "Mitchell Macdonald",
+    "number": "11",
+    "games_played": "5",
+    "goals": "3",
+    "assists": "3",
+    "points": "6",
+    "penalty_minutes": "1.2"
   },
   {
     "player_id": "1279021",
     "name": "Aamir Bhangu",
     "number": "9",
-    "games_played": "4",
+    "games_played": "5",
     "goals": "1",
-    "assists": "4",
-    "points": "5",
-    "penalty_minutes": "1.3"
+    "assists": "5",
+    "points": "6",
+    "penalty_minutes": "1.2"
   },
   {
     "player_id": "2936835",
-    "name": "Diego Millan",
+    "name": "Diego Millan (A)",
     "number": "8",
     "games_played": "4",
     "goals": "3",
@@ -50,9 +60,9 @@
     "penalty_minutes": "1.0"
   },
   {
-    "player_id": "2937068",
-    "name": "Mitchell Macdonald",
-    "number": "11",
+    "player_id": "1078116",
+    "name": "Jake Ganske",
+    "number": "18",
     "games_played": "4",
     "goals": "2",
     "assists": "2",
@@ -60,34 +70,34 @@
     "penalty_minutes": "1.0"
   },
   {
-    "player_id": "1078116",
-    "name": "Jake Ganske",
-    "number": "18",
-    "games_played": "3",
-    "goals": "2",
-    "assists": "1",
-    "points": "3",
-    "penalty_minutes": "1.0"
-  },
-  {
     "player_id": "2937206",
     "name": "Anthony Gwizd",
     "number": "7",
-    "games_played": "2",
+    "games_played": "3",
     "goals": "1",
-    "assists": "2",
-    "points": "3",
-    "penalty_minutes": "1.5"
+    "assists": "3",
+    "points": "4",
+    "penalty_minutes": "1.3"
   },
   {
     "player_id": "3265728",
     "name": "Robby Davis",
     "number": "15",
-    "games_played": "3",
-    "goals": "2",
+    "games_played": "4",
+    "goals": "3",
     "assists": "0",
-    "points": "2",
-    "penalty_minutes": "0.7"
+    "points": "3",
+    "penalty_minutes": "0.8"
+  },
+  {
+    "player_id": "1345420",
+    "name": "Zander Andreone",
+    "number": "96",
+    "games_played": "2",
+    "goals": "1",
+    "assists": "2",
+    "points": "3",
+    "penalty_minutes": "1.5"
   },
   {
     "player_id": "108683",
@@ -101,23 +111,13 @@
   },
   {
     "player_id": "2936810",
-    "name": "Nolan Weisheit",
+    "name": "Nolan Weisheit (C)",
     "number": "44",
-    "games_played": "3",
+    "games_played": "4",
     "goals": "1",
     "assists": "1",
     "points": "2",
-    "penalty_minutes": "0.7"
-  },
-  {
-    "player_id": "1345420",
-    "name": "Zander Andreone",
-    "number": "96",
-    "games_played": "1",
-    "goals": "0",
-    "assists": "2",
-    "points": "2",
-    "penalty_minutes": "2.0"
+    "penalty_minutes": "0.5"
   },
   {
     "player_id": "3580025",
@@ -140,19 +140,19 @@
     "penalty_minutes": "0.0"
   },
   {
-    "player_id": "3588796",
-    "name": "Cole Parry",
-    "number": "",
-    "games_played": "0",
+    "player_id": "3589243",
+    "name": "Anthony Jiang",
+    "number": "34",
+    "games_played": "1",
     "goals": "0",
     "assists": "0",
     "points": "0",
     "penalty_minutes": "0.0"
   },
   {
-    "player_id": "3589243",
-    "name": "Anthony Jiang",
-    "number": "34",
+    "player_id": "3588796",
+    "name": "Cole Parry",
+    "number": "33",
     "games_played": "1",
     "goals": "0",
     "assists": "0",

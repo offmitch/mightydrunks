@@ -8,6 +8,7 @@ from scraper.stats import get_stats
 
 app = Flask(__name__)
 CORS(app, origins=["https://mightydrunks.onrender.com"])
+# CORS(app, origins=["http://localhost:3000"])
 
 
 @app.route("/api/roster")
@@ -48,3 +49,4 @@ def scores():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    # app.run(debug=True)
