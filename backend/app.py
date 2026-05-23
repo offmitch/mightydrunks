@@ -28,7 +28,7 @@ def stats():
         return jsonify({"error": str(e)}), 500
     
 @app.route("/api/schedule")
-def schedule():
+def schedule_route():
     try:
         games = get_schedule()
         return jsonify(games)

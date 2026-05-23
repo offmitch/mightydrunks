@@ -4,7 +4,7 @@ import json
 import os
 import time
 from urllib.parse import unquote
-from backend.scraper.schedule import should_refresh_cache
+from scraper.schedule import should_refresh_cache
 from config.settings import SCORES_URL, AUTH_TICKET
 
 HEADERS = {
