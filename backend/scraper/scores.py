@@ -4,6 +4,7 @@ import json
 import os
 import time
 from urllib.parse import unquote
+from backend.scraper.schedule import should_refresh_cache
 from config.settings import SCORES_URL, AUTH_TICKET
 
 HEADERS = {
@@ -14,17 +15,15 @@ HEADERS = {
 }
 
 CACHE_FILE = "scores_cache.json"
-CACHE_DURATION = 60 * 60 * 24 * 7
 
-def get_scores() -> list[dict]:
-    # Check if cache exists and is still valid
-    if os.path.exists(CACHE_FILE):
-        file_age = time.time() - os.path.getmtime(CACHE_FILE)
 
-        if file_age < CACHE_DURATION:
-            with open(CACHE_FILE, "r") as f:
-                print("Loading scores from cache...")
-                return json.load(f)
+def get_scores(schedule: list[dict]) -> list[dict]:
+
+    # if not should_refresh_cache(schedule):
+    #     with open(CACHE_FILE, "r") as f:
+    #         print("Loading scores from cache...")
+    #         return json.load(f)
+
     # Otherwise fetch fresh data
     print("Fetching fresh scores from API...")
 

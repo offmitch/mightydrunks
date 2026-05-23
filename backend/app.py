@@ -9,6 +9,8 @@ from scraper.stats import get_stats
 app = Flask(__name__)
 CORS(app, origins=["https://mightydrunks.onrender.com"])
 
+schedule = get_schedule()
+
 @app.route("/api/roster")
 def roster():
     try:
@@ -20,7 +22,7 @@ def roster():
 @app.route("/api/stats")
 def stats():
     try:
-        players = get_stats()
+        players = get_stats(schedule)
         return jsonify(players)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -36,7 +38,7 @@ def schedule():
 @app.route("/api/scores")
 def scores():
     try:
-        scores = get_scores()
+        scores = get_scores(schedule)
         return jsonify(scores)
     except Exception as e:
         return jsonify({"error": str(e)}), 500

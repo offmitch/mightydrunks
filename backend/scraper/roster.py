@@ -10,6 +10,7 @@ HEADERS = {
 }
 
 def get_roster():
+
     res = requests.get(URL, headers=HEADERS)
     data = res.json()
 

@@ -6,6 +6,7 @@ import re
 from urllib.parse import unquote
 from bs4 import BeautifulSoup
 from config.settings import STATS_URL, AUTH_TICKET
+from scraper.schedule import should_refresh_cache
 
 headers = {
     "Authorization": AUTH_TICKET,
@@ -23,18 +24,14 @@ headers = {
 }
 
 CACHE_FILE = "stats_cache.json"
-CACHE_DURATION = 60 * 60 * 24 * 7
 
-def get_stats() -> list[dict]:
+def get_stats(schedule: list[dict]) -> list[dict]:
 
-    # Check if cache exists and is still valid
-    if os.path.exists(CACHE_FILE):
-        file_age = time.time() - os.path.getmtime(CACHE_FILE)
+    # if not should_refresh_cache(schedule):
+    #     with open(CACHE_FILE, "r") as f:
+    #         print("Loading stats from cache...")
+    #         return json.load(f)
 
-        if file_age < CACHE_DURATION:
-            with open(CACHE_FILE, "r") as f:
-                print("Loading stats from cache...")
-                return json.load(f)
 
     # Otherwise fetch fresh data
     print("Fetching fresh stats from API...")

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import requests
 import json
 import os
@@ -22,9 +24,41 @@ headers = {
 }
 
 CACHE_FILE = "schedule_cache.json"
-CACHE_DURATION = 60 * 60 * 24 * 7
+
+def should_refresh_cache(schedule: list[dict]) -> bool:
+
+    # No cache yet
+    if not os.path.exists(CACHE_FILE):
+        return True
+
+    today = datetime.now().date()
+
+    # Find today's games that are final
+    todays_final_games = []
+
+    for game in schedule:
+
+        game_date = datetime.fromisoformat(game["datetime"]).date()
+
+        if game_date != today:
+            continue
+
+        status = game["status"].lower()
+
+        if status in ["Final"]:
+            todays_final_games.append(game)
+
+    # No completed game today
+    if not todays_final_games:
+        return False
+
+    # Prevent refreshing multiple times same day
+    last_modified = datetime.fromtimestamp(os.path.getmtime(CACHE_FILE))
+
+    return last_modified.date() != today
 
 def get_schedule() -> list[dict]:
+  
     # Check if cache exists and is still valid
     if os.path.exists(CACHE_FILE):
         file_age = time.time() - os.path.getmtime(CACHE_FILE)
