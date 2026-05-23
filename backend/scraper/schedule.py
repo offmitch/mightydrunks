@@ -58,15 +58,7 @@ def should_refresh_cache(schedule: list[dict]) -> bool:
     return last_modified.date() != today
 
 def get_schedule() -> list[dict]:
-  
-    # Check if cache exists and is still valid
-    if os.path.exists(CACHE_FILE):
-        file_age = time.time() - os.path.getmtime(CACHE_FILE)
 
-        if file_age < CACHE_DURATION:
-            with open(CACHE_FILE, "r") as f:
-                print("Loading schedule from cache...")
-                return json.load(f)
 
     # Otherwise fetch fresh data
     print("Fetching fresh schedule from API...")
