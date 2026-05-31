@@ -1,5 +1,34 @@
 [
   {
+    "game_id": 1262685,
+    "status": "Final",
+    "game_type": "Regular Season",
+    "date": "2026-05-29",
+    "time": "21:00",
+    "datetime": "2026-05-29T21:00",
+    "datetime_tz": "2026-05-30T04:00:00+00:00",
+    "time_zone": "America/Los_Angeles",
+    "facility": "The Hockey House",
+    "facility_address": "#107-20740 Mufford Cres., Langley, B.C., Canada, V2Y1N9",
+    "division": "Zinc Division",
+    "home": {
+      "team_id": 633828,
+      "team": "Mighty Drunks",
+      "score": 11,
+      "shots": 11,
+      "pim": 0
+    },
+    "away": {
+      "team_id": 631919,
+      "team": "Knights",
+      "score": 6,
+      "shots": 6,
+      "pim": 0
+    },
+    "overtime": false,
+    "shootout": false
+  },
+  {
     "game_id": 1247156,
     "status": "Final",
     "game_type": "Regular Season",

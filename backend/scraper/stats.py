@@ -25,12 +25,12 @@ headers = {
 
 CACHE_FILE = "stats_cache.json"
 
-def get_stats(schedule: list[dict]) -> list[dict]:
+def get_stats() -> list[dict]:
 
-    if not should_refresh_cache(schedule):
-        with open(CACHE_FILE, "r") as f:
-            print("Loading stats from cache...")
-            return json.load(f)
+    # if not should_refresh_cache(schedule):
+    #     with open(CACHE_FILE, "r") as f:
+    #         print("Loading stats from cache...")
+    #         return json.load(f)
 
 
     # Otherwise fetch fresh data

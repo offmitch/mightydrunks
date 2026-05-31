@@ -45,7 +45,7 @@ def should_refresh_cache(schedule: list[dict]) -> bool:
 
         status = game["status"].lower()
 
-        if status in ["Final"]:
+        if status == "final":
             todays_final_games.append(game)
 
     # No completed game today

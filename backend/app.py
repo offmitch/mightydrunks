@@ -22,8 +22,7 @@ def roster():
 @app.route("/api/stats")
 def stats():
     try:
-        schedule = get_schedule()
-        players = get_stats(schedule)
+        players = get_stats()
         return jsonify(players)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -39,8 +38,7 @@ def schedule_route():
 @app.route("/api/scores")
 def scores():
     try:
-        schedule = get_schedule()
-        scores = get_scores(schedule)
+        scores = get_scores()
         return jsonify(scores)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
