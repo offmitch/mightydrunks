@@ -31,7 +31,7 @@ const PLAYER_DATA = {
     instagram: "aamir_bhangu",
   },
   "Mitchell MacDonald": {
-    headshot: "images/mitchell.jpeg",
+    headshot: "images/mitchell.png",
     bio: "",
     instagram: "offmitch",
   },
