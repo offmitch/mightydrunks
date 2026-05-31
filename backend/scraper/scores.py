@@ -17,13 +17,33 @@ HEADERS = {
 CACHE_FILE = "scores_cache.json"
 
 
-def get_scores() -> list[dict]:
+def get_scores(schedule: list[dict]) -> list[dict]:
+
+    if not should_refresh_cache(schedule):
+        with open(CACHE_FILE, "r") as f:
+            print("Loading scores from cache...")
+            return json.load(f)
+
+    scores = fetch_scores()
+
+    with open(CACHE_FILE, "w") as f:
+        json.dump(scores, f, indent=2)
+
+    return scores
+
+def fetch_scores() -> list[dict]:
+
+    print("Fetching fresh scores from API...")
 
     res = requests.get(SCORES_URL, headers=HEADERS)
     res.raise_for_status()
-    scores = parse_scores_response(res.json()["content"])
 
-    # Save to cache
+    return parse_scores_response(res.json()["content"])
+
+def refresh_scores_cache() -> list[dict]:
+
+    scores = fetch_scores()
+
     with open(CACHE_FILE, "w") as f:
         json.dump(scores, f, indent=2)
 

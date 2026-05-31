@@ -1,10 +1,10 @@
 import os
 from flask import Flask, jsonify
 from flask_cors import CORS
-from scraper.scores import get_scores
+from scraper.scores import get_scores, refresh_scores_cache
 from scraper.schedule import get_schedule
 from scraper.roster import get_roster
-from scraper.stats import get_stats
+from scraper.stats import get_stats, refresh_stats_cache
 
 app = Flask(__name__)
 CORS(app, origins=["https://mightydrunks.onrender.com"])
@@ -22,10 +22,12 @@ def roster():
 @app.route("/api/stats")
 def stats():
     try:
-        players = get_stats()
+        schedule = get_schedule()
+        players = get_stats(schedule)
         return jsonify(players)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
     
 @app.route("/api/schedule")
 def schedule_route():
@@ -38,12 +40,22 @@ def schedule_route():
 @app.route("/api/scores")
 def scores():
     try:
-        scores = get_scores()
+        schedule = get_schedule()
+        scores = get_scores(schedule)
         return jsonify(scores)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route("/api/refresh")
+def refresh():
+    stats = refresh_stats_cache()
+    scores = refresh_scores_cache()
 
+    return jsonify({
+        "success": True,
+        "stats_count": len(stats),
+        "scores_count": len(scores)
+    })
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))

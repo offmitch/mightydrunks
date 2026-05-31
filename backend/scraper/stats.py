@@ -23,27 +23,39 @@ headers = {
     "Sec-Fetch-Site": "cross-site",
 }
 
-CACHE_FILE = "stats_cache.json"
+STATS_CACHE_FILE = "stats_cache.json"
 
-def get_stats() -> list[dict]:
+def get_stats(schedule: list[dict]) -> list[dict]:
 
-    # if not should_refresh_cache(schedule):
-    #     with open(CACHE_FILE, "r") as f:
-    #         print("Loading stats from cache...")
-    #         return json.load(f)
+    if not should_refresh_cache(schedule):
+        with open(STATS_CACHE_FILE, "r") as f:
+            print("Loading stats from cache...")
+            return json.load(f)
 
+    players = fetch_stats()
 
-    # Otherwise fetch fresh data
+    with open(STATS_CACHE_FILE, "w") as f:
+        json.dump(players, f, indent=2)
+
+    return players
+
+def fetch_stats() -> list[dict]:
+
     print("Fetching fresh stats from API...")
 
     res = requests.get(STATS_URL, headers=headers)
-    players = parse_stats_response(res.json()["content"])
+    res.raise_for_status()
 
-    # Save to cache
+    return parse_stats_response(res.json()["content"])
+
+def refresh_stats_cache() -> list[dict]:
+
+    players = fetch_stats()
+
     with open(CACHE_FILE, "w") as f:
         json.dump(players, f, indent=2)
 
-    return players 
+    return players
 
 def parse_stats_response(raw_content: str) -> list[dict]:
     """
