@@ -670,6 +670,22 @@ tbody tr.clickable:hover { background: rgba(245,216,0,0.06); }
   background: linear-gradient(90deg, var(--green-main), var(--yellow-main), var(--green-main));
   z-index: 200;
 }
+.refresh-btn {
+  background: transparent;
+  color: var(--green-light);
+  border: 1px solid var(--green-mid);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.refresh-btn:hover {
+  background: rgba(58, 154, 58, 0.15);
+  border-color: var(--green-light);
+}
 
 @media (max-width: 320px) {
   .hero-stats { gap: 10px; }

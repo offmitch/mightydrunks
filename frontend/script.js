@@ -415,6 +415,43 @@ document
   });
 document.getElementById("profileClose").addEventListener("click", closeProfile);
 
+document
+  .getElementById("refreshBtn")
+  .addEventListener("click", async () => {
+
+    const btn = document.getElementById("refreshBtn");
+
+    btn.disabled = true;
+    btn.textContent = "Refreshing...";
+
+    try {
+
+        const res = await fetch(`${BASE}/refresh`);
+        const data = await res.json();
+
+        if (data.success) {
+
+            await Promise.all([
+                loadStats(),
+                loadScores()
+            ]);
+
+            alert("Stats and scores refreshed!");
+        }
+
+    } catch (err) {
+
+        console.error(err);
+        alert("Refresh failed.");
+
+    } finally {
+
+        btn.disabled = false;
+        btn.textContent = "Refresh Data";
+
+    }
+});
+
 // ── init ──────────────────────────────────────────────────────
 
 loadHome();
