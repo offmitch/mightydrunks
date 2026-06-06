@@ -1,6 +1,7 @@
 import os
 from flask import Flask, jsonify
 from flask_cors import CORS
+from scraper.standings import get_standings
 from scraper.scores import get_scores, refresh_scores_cache
 from scraper.schedule import get_schedule
 from scraper.roster import get_roster
@@ -44,6 +45,18 @@ def scores():
         scores = get_scores(schedule)
         return jsonify(scores)
     except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route("/api/standings")
+def standings():
+    try:
+        schedule = get_schedule()
+        standings = get_standings(schedule)
+        return jsonify(standings)
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
         return jsonify({"error": str(e)}), 500
 
 @app.route("/api/refresh")

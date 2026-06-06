@@ -211,7 +211,6 @@ async function loadRoster() {
     </tr>
   `;
 
-
   const res = await fetch("data/roster.json");
   const players = await res.json();
   cachedRoster = players;
@@ -340,6 +339,51 @@ async function loadScores() {
   });
 }
 
+// ── standings ────────────────────────────────────────────────────
+
+async function loadStandings() {
+  console.log("Loading standings...");
+  const tbody = document.querySelector("#standingsTable tbody");
+
+  tbody.innerHTML = `
+    <tr>
+      <td colspan="10">
+        <div class="spinner-wrap">
+          <div class="spinner"></div>
+          <div class="spinner-label">Loading standings...</div>
+        </div>
+      </td>
+    </tr>
+  `;
+  const res = await fetch(`${BASE}/standings`);
+
+  console.log("status:", res.status);
+
+  const standings = await res.json();
+  console.log("standings:", standings);
+
+  tbody.innerHTML = "";
+
+  standings.forEach((team) => {
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${team.rank}</td>
+      <td>${team.team?.name || "-"}</td>
+      <td>${team.gp}</td>
+      <td>${team.wins}</td>
+      <td>${team.losses}</td>
+      <td>${team.ties}</td>
+      <td>${team.points}</td>
+      <td>${team.goals_for}</td>
+      <td>${team.goals_against}</td>
+      <td>${team.goal_diff}</td>
+    `;
+
+    tbody.appendChild(row);
+  });
+}
+
 // ── news ──────────────────────────────────────────────────────
 
 function loadNews() {
@@ -416,42 +460,27 @@ document
   });
 document.getElementById("profileClose").addEventListener("click", closeProfile);
 
-document
-  .getElementById("refreshBtn")
-  .addEventListener("click", async () => {
+document.getElementById("refreshBtn").addEventListener("click", async () => {
+  const btn = document.getElementById("refreshBtn");
 
-    const btn = document.getElementById("refreshBtn");
+  btn.disabled = true;
+  btn.textContent = "Refreshing...";
 
-    btn.disabled = true;
-    btn.textContent = "Refreshing...";
+  try {
+    const res = await fetch(`${BASE}/refresh`);
+    const data = await res.json();
 
-    try {
+    if (data.success) {
+      await Promise.all([loadStats(), loadScores()]);
 
-        const res = await fetch(`${BASE}/refresh`);
-        const data = await res.json();
-
-        if (data.success) {
-
-            await Promise.all([
-                loadStats(),
-                loadScores()
-            ]);
-
-            reload();
-            // alert("Stats and scores refreshed!");
-        }
-
-    } catch (err) {
-
-        console.error(err);
-        // alert("Refresh failed.");
-
-    } finally {
-
-        btn.disabled = false;
-        btn.textContent = "Refresh Data";
-
+      reload();
     }
+  } catch (err) {
+    console.error(err);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Refresh Data";
+  }
 });
 
 // ── init ──────────────────────────────────────────────────────
@@ -460,5 +489,6 @@ loadHome();
 loadRoster();
 loadStats();
 loadSchedule();
+loadStandings();
 loadScores();
 loadNews();
