@@ -436,13 +436,14 @@ document
                 loadScores()
             ]);
 
-            alert("Stats and scores refreshed!");
+            reload();
+            // alert("Stats and scores refreshed!");
         }
 
     } catch (err) {
 
         console.error(err);
-        alert("Refresh failed.");
+        // alert("Refresh failed.");
 
     } finally {
 

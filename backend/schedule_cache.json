@@ -1,34 +1,5 @@
 [
   {
-    "game_id": 1262695,
-    "status": "Not Started",
-    "game_type": "Regular Season",
-    "date": "2026-06-02",
-    "time": "22:00",
-    "datetime": "2026-06-02T22:00",
-    "datetime_tz": "2026-06-03T05:00:00+00:00",
-    "time_zone": "America/Los_Angeles",
-    "facility": "The Hockey House",
-    "facility_address": "#107-20740 Mufford Cres., Langley, B.C., Canada, V2Y1N9",
-    "division": "Zinc Division",
-    "home": {
-      "team_id": 636544,
-      "team": "Bullfrogs",
-      "score": 0,
-      "shots": 0,
-      "pim": 0
-    },
-    "away": {
-      "team_id": 633828,
-      "team": "Mighty Drunks",
-      "score": 0,
-      "shots": 0,
-      "pim": 0
-    },
-    "overtime": false,
-    "shootout": false
-  },
-  {
     "game_id": 1269971,
     "status": "Not Started",
     "game_type": "Regular Season",
