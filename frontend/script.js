@@ -211,6 +211,7 @@ async function loadRoster() {
     </tr>
   `;
 
+
   const res = await fetch("data/roster.json");
   const players = await res.json();
   cachedRoster = players;

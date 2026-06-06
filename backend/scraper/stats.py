@@ -54,6 +54,7 @@ def refresh_stats_cache() -> list[dict]:
 
     with open(STATS_CACHE_FILE, "w") as f:
         json.dump(players, f, indent=2)
+        
 
     return players
 
