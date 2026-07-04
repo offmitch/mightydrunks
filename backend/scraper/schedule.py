@@ -59,10 +59,6 @@ def should_refresh_cache(schedule: list[dict]) -> bool:
 
 def get_schedule() -> list[dict]:
 
-
-    # Otherwise fetch fresh data
-    print("Fetching fresh schedule from API...")
-
     res = requests.get(SCHEDULE_URL, headers=headers)
     games = parse_schedule_response(res.json()["content"])
 

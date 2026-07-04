@@ -1,5 +1,92 @@
 [
   {
+    "game_id": 1269849,
+    "status": "Final",
+    "game_type": "Regular Season",
+    "date": "2026-06-28",
+    "time": "19:00",
+    "datetime": "2026-06-28T19:00",
+    "datetime_tz": "2026-06-29T02:00:00+00:00",
+    "time_zone": "America/Los_Angeles",
+    "facility": "The Hockey House",
+    "facility_address": "#107-20740 Mufford Cres., Langley, B.C., Canada, V2Y1N9",
+    "division": "Zinc Division",
+    "home": {
+      "team_id": 633828,
+      "team": "Mighty Drunks",
+      "score": 1,
+      "shots": 1,
+      "pim": 4
+    },
+    "away": {
+      "team_id": 633788,
+      "team": "Barrels",
+      "score": 7,
+      "shots": 7,
+      "pim": 4
+    },
+    "overtime": false,
+    "shootout": false
+  },
+  {
+    "game_id": 1269812,
+    "status": "Final",
+    "game_type": "Regular Season",
+    "date": "2026-06-18",
+    "time": "20:00",
+    "datetime": "2026-06-18T20:00",
+    "datetime_tz": "2026-06-19T03:00:00+00:00",
+    "time_zone": "America/Los_Angeles",
+    "facility": "The Hockey House",
+    "facility_address": "#107-20740 Mufford Cres., Langley, B.C., Canada, V2Y1N9",
+    "division": "Zinc Division",
+    "home": {
+      "team_id": 633828,
+      "team": "Mighty Drunks",
+      "score": 3,
+      "shots": 3,
+      "pim": 4
+    },
+    "away": {
+      "team_id": 656988,
+      "team": "Huskies",
+      "score": 4,
+      "shots": 4,
+      "pim": 0
+    },
+    "overtime": false,
+    "shootout": false
+  },
+  {
+    "game_id": 1269971,
+    "status": "Final",
+    "game_type": "Regular Season",
+    "date": "2026-06-15",
+    "time": "22:00",
+    "datetime": "2026-06-15T22:00",
+    "datetime_tz": "2026-06-16T05:00:00+00:00",
+    "time_zone": "America/Los_Angeles",
+    "facility": "The Hockey House",
+    "facility_address": "#107-20740 Mufford Cres., Langley, B.C., Canada, V2Y1N9",
+    "division": "Zinc Division",
+    "home": {
+      "team_id": 633828,
+      "team": "Mighty Drunks",
+      "score": 8,
+      "shots": 8,
+      "pim": 0
+    },
+    "away": {
+      "team_id": 631645,
+      "team": "Vikings",
+      "score": 7,
+      "shots": 7,
+      "pim": 2
+    },
+    "overtime": true,
+    "shootout": false
+  },
+  {
     "game_id": 1262695,
     "status": "Final",
     "game_type": "Regular Season",

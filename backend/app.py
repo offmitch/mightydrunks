@@ -1,7 +1,7 @@
 import os
 from flask import Flask, jsonify
 from flask_cors import CORS
-from scraper.standings import get_standings
+from scraper.standings import get_standings, refresh_standings_cache
 from scraper.scores import get_scores, refresh_scores_cache
 from scraper.schedule import get_schedule
 from scraper.roster import get_roster
@@ -63,11 +63,13 @@ def standings():
 def refresh():
     stats = refresh_stats_cache()
     scores = refresh_scores_cache()
+    standings = refresh_standings_cache()
 
     return jsonify({
         "success": True,
         "stats_count": len(stats),
-        "scores_count": len(scores)
+        "scores_count": len(scores),
+        "standings_count": len(standings)
     })
 
 if __name__ == "__main__":

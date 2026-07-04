@@ -473,7 +473,7 @@ document.getElementById("refreshBtn").addEventListener("click", async () => {
     if (data.success) {
       await Promise.all([loadStats(), loadScores()]);
 
-      reload();
+      window.location.reload();
     }
   } catch (err) {
     console.error(err);
