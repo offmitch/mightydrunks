@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import re
 import json
 from scraper.schedule import CACHE_FILE, should_refresh_cache
-from config.settings import SCORES_URL, STANDINGS_URL, AUTH_TICKET
+from config.settings import STANDINGS_URL, AUTH_TICKET
 
 HEADERS = {
     "Authorization": AUTH_TICKET,

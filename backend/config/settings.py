@@ -2,11 +2,12 @@ import os
 # from dotenv import load_dotenv
 # load_dotenv()
 
-TEAM_ID = "633828"
+TEAM_ID = "696288"
+DIVISION_ID = "51982"
 AUTH_TICKET = os.getenv("AUTH_TICKET")
 
 SCHEDULE_URL = f"https://web.api.digitalshift.ca/partials/stats/schedule/table?team_id={TEAM_ID}&header=false"
 STATS_URL = f"https://web.api.digitalshift.ca/partials/stats/team/stats?team_id={TEAM_ID}"
 ROSTER_URL = f"https://web.api.digitalshift.ca/partials/stats/team/roster?team_id={TEAM_ID}"
 SCORES_URL = f"https://web.api.digitalshift.ca/partials/stats/scores/table?order=datetime&team_id={TEAM_ID}&offset=1&limit=20&header=false"
-STANDINGS_URL = f"https://web.api.digitalshift.ca/partials/stats/standings/table?division_id=48556&league_toggle=division"
+STANDINGS_URL = f"https://web.api.digitalshift.ca/partials/stats/standings/table?division_id={DIVISION_ID}&league_toggle=division"
